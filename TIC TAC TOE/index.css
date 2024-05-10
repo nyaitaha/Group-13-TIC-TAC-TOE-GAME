@@ -1,0 +1,25 @@
+#display{
+    border: 1px solid transparent;
+    background-color:aqua;
+    align-items: center;
+    font-size: 16rem;
+    text-align: center;
+    animation-name: display;
+    animation-duration: 5s;
+}
+@keyframes display {
+    20%{
+        transform: scaleX(2);
+        transform: scaleY(10);
+     }
+    50%{
+      transform: scaleX(3);
+      transform: scaleY(2);
+
+    }
+   
+     100%{
+      transform: scaleX(1);
+      transform: scaleY(1);
+    }
+}
