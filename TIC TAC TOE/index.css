@@ -1,16 +1,19 @@
-#display{
+div{
     border: 1px solid transparent;
     background-color:aqua;
-    align-items: center;
-    font-size: 16rem;
+    font-size: 5rem;
+    margin-top: 50px;
+    margin-left: 200px;
     text-align: center;
+    font-weight:bolder;
     animation-name: display;
-    animation-duration: 5s;
+    animation-duration: 3s;   
 }
+
 @keyframes display {
     20%{
         transform: scaleX(2);
-        transform: scaleY(10);
+        transform: scaleY(5);
      }
     50%{
       transform: scaleX(3);
@@ -21,5 +24,7 @@
      100%{
       transform: scaleX(1);
       transform: scaleY(1);
+      width: 600px;
+      height: 600px;
     }
-}
+  }
