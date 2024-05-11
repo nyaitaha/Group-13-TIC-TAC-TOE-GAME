@@ -1,11 +1,15 @@
 const startEl = document.getElementById("start-el");
 const container = document.getElementById("container");
 const startBtn = document.getElementById("start-btn");
-const cells = document.querySelectorAll('.cell');
+const cells = document.querySelectorAll('.grid .cell');
+const xScore = document.getElementById("x-score");
+const oScore = document.getElementById("o-score");
 
 let currentPlayer = 'X';
 let gameBoard = ['', '', '', '', '', '', '', '', ''];
 let gameActive = false;
+let xWins = 0; 
+let oWins = 0; 
 
 startBtn.addEventListener("click", function(){
   if (!gameActive) {
@@ -20,14 +24,20 @@ startBtn.addEventListener("click", function(){
   }
 });
 
-cells.forEach(cell => {
+cells.forEach((cell, index) => {
   cell.addEventListener('click', function() {
-    const cellIndex = parseInt(cell.dataset.cellIndex);
-    if (gameActive && gameBoard[cellIndex] === '') {
+    if (gameActive && gameBoard[index] === '') {
       cell.innerText = currentPlayer;
-      gameBoard[cellIndex] = currentPlayer;
+      gameBoard[index] = currentPlayer;
       if (checkWin()) {
         alert(`Player ${currentPlayer} wins!`);
+        if (currentPlayer === 'X') {
+          xWins++; 
+          xScore.textContent = `X: ${xWins}`; 
+        } else {
+          oWins++; 
+          oScore.textContent = `O: ${oWins}`; 
+        }
         resetGame();
       } else if (checkDraw()) {
         alert("It's a draw!");
@@ -40,29 +50,24 @@ cells.forEach(cell => {
 });
 
 function checkWin() {
-  const winCombinations = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], 
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+  const winConditions = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
     [0, 4, 8], [2, 4, 6]
   ];
-
-  for (let combination of winCombinations) {
+  return winConditions.some(combination => {
     const [a, b, c] = combination;
-    if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-      return true;
-    }
-  }
-  return false;
+    return gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c];
+  });
 }
 
 function checkDraw() {
-  return gameBoard.every(cell => cell !== '');
+  return !gameBoard.includes('');
 }
 
 function resetGame() {
   gameBoard = ['', '', '', '', '', '', '', '', ''];
-  cells.forEach(cell => {
-    cell.innerText = '';
-  });
+  cells.forEach(cell => cell.innerText = '');
   currentPlayer = 'X';
+  gameActive = false;
 }
