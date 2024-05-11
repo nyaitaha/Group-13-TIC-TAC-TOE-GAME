@@ -77,7 +77,7 @@ h1{
     height: 300px;
   }
   
-  #cell {
+  .cell {
     align-items: center;
     background-color: #333;
     font-size: 3rem;

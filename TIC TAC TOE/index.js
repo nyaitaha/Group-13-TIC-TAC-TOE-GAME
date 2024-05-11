@@ -4,6 +4,7 @@ const startBtn = document.getElementById("start-btn");
 const cells = document.querySelectorAll('.grid .cell');
 const xScore = document.getElementById("x-score");
 const oScore = document.getElementById("o-score");
+const resetBtn = document.getElementById("reset-btn");
 
 let currentPlayer = 'X';
 let gameBoard = ['', '', '', '', '', '', '', '', ''];
@@ -20,15 +21,16 @@ startBtn.addEventListener("click", function(){
     container.style.width = '300px'; 
     container.style.height = '300px';
     container.style.margin = 'auto';
-    gameActive = true;
+   
   }
+  gameActive = true;
 });
 
-cells.forEach((cell, index) => {
+cells.forEach((cell, cellIndex) => {
   cell.addEventListener('click', function() {
-    if (gameActive && gameBoard[index] === '') {
+    if (gameActive && gameBoard[cellIndex] === '') {
       cell.innerText = currentPlayer;
-      gameBoard[index] = currentPlayer;
+      gameBoard[cellIndex] = currentPlayer;
       if (checkWin()) {
         alert(`Player ${currentPlayer} wins!`);
         if (currentPlayer === 'X') {
@@ -57,7 +59,7 @@ function checkWin() {
   ];
   return winConditions.some(combination => {
     const [a, b, c] = combination;
-    return gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c];
+    return gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[b] === gameBoard[c];
   });
 }
 
@@ -69,5 +71,11 @@ function resetGame() {
   gameBoard = ['', '', '', '', '', '', '', '', ''];
   cells.forEach(cell => cell.innerText = '');
   currentPlayer = 'X';
-  gameActive = false;
+  xWins = 0; 
+  oWins = 0; 
+  gameActive = true;
 }
+
+resetBtn.addEventListener("click", function() {
+    resetGame();
+  });
