@@ -63,11 +63,7 @@ h1{
     z-index: -1; 
  }
  
-#container {
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+
   
    #container{
     display: none;
@@ -75,6 +71,9 @@ h1{
     grid-gap: 10px;
     width: 300px;
     height: 300px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
   }
   
   .cell {
@@ -91,9 +90,12 @@ h1{
     background-color: #555;
   }
   #score-board {
+    display: none;
   text-align: center;
   margin-top: 50px;
   font-size: 2rem;
+  border: solid 1px whitesmoke;
+  background-image: radial-gradient(whitesmoke,gray);
   border-radius: 50%;
   }
   

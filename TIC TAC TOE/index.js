@@ -5,6 +5,7 @@ const cells = document.querySelectorAll('.grid .cell');
 const xScore = document.getElementById("x-score");
 const oScore = document.getElementById("o-score");
 const resetBtn = document.getElementById("reset-btn");
+const scoreBoard = document.getElementById("score-board")
 
 let currentPlayer = 'X';
 let gameBoard = ['', '', '', '', '', '', '', '', ''];
@@ -16,6 +17,7 @@ startBtn.addEventListener("click", function(){
   if (!gameActive) {
     startEl.style.display = 'none';
     container.style.display = 'grid';
+    scoreBoard.style.display = 'block';
     container.style.gridTemplateColumns = 'repeat(3, 1fr)';
     container.style.gridGap = '10px';
     container.style.width = '300px'; 
@@ -34,16 +36,15 @@ cells.forEach((cell, cellIndex) => {
       if (checkWin()) {
         alert(`Player ${currentPlayer} wins!`);
         if (currentPlayer === 'X') {
-          xWins++; 
+          xWins += 1; 
           xScore.textContent = `X: ${xWins}`; 
         } else {
-          oWins++; 
+          oWins += 1; 
           oScore.textContent = `O: ${oWins}`; 
-        }
-        resetGame();
+         }
+        clearGameBoard()
       } else if (checkDraw()) {
-        alert("It's a draw!");
-        resetGame();
+        clearGameBoard()
       } else {
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
       }
@@ -72,8 +73,18 @@ function resetGame() {
   cells.forEach(cell => cell.innerText = '');
   currentPlayer = 'X';
   xWins = 0; 
+  xScore.textContent = `X: ${xWins}`; 
   oWins = 0; 
+  oScore.textContent = `O: ${oWins}`; 
   gameActive = true;
+  
+}
+
+function clearGameBoard() {
+    gameBoard = ['', '', '', '', '', '', '', '', ''];
+    cells.forEach(cell => cell.innerText = '');
+    currentPlayer = 'X';
+  
 }
 
 resetBtn.addEventListener("click", function() {
