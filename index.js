@@ -40,10 +40,10 @@ cells.forEach((cell, cellIndex) => {
           oWins++; 
           oScore.textContent = `O: ${oWins}`; 
         }
-        resetGame();
+       changeScore();
       } else if (checkDraw()) {
         alert("It's a draw!");
-        resetGame();
+       changeScore();
       } else {
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
       }
@@ -67,13 +67,21 @@ function checkDraw() {
   return !gameBoard.includes('');
 }
 
+function changeScore(){
+  gameBoard = ['', '', '', '', '', '', '', '', ''];
+  cells.forEach(cell => cell.innerText = '');
+  currentPlayer = 'X';
+  xScore += xScore;
+  oScore += oScore;
+
+}
 function resetGame() {
   gameBoard = ['', '', '', '', '', '', '', '', ''];
   cells.forEach(cell => cell.innerText = '');
   currentPlayer = 'X';
   xWins = 0; 
   oWins = 0; 
-  gameActive = true;
+  gameActive = false;``
 }
 
 resetBtn.addEventListener("click", function() {
